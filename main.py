@@ -2,31 +2,32 @@
 from AccountManager import *
 from BankAccount import *
 
-
+manager = AccountManager()
 while True:
 
-      print("1. Add New Account \n2. Display All Accounts "
-            "\n3. Search for Account \n4. Delete Account "
+      print("1. Add New Account "
+            "\n2. Display All Accounts "
+            "\n3. Search for Account "
+            "\n4. Delete Account "
             "\nQ/q To quit")
 
       choice = (input("Enter Your Choice: "))
 
       if choice == "1":
 
-            name = input("Enter account Holder Name: ")
-            balance = int(input("Enter account Balance: "))
-            account = BankAccount(name, balance)
-
-            m = AccountManager(account)
-            m.add_account(account)
+            name = input("Enter account holder name: ")
+            initial_balance = int(input("Enter initial balance: "))
+            account = BankAccount(name, initial_balance)
+            manager.add_account(account)
 
             input(">>> Press Any key to continue <<<")
 
       elif choice == "2":
-            m = AccountManager()
-            m.display_accounts()
+            manager.display_accounts()
+            input(">>> Press Any key to continue <<<")
       elif choice == "3":
-            pass
+            acc_num = input("Enter the account number to search for: ")
+      
       elif choice == "4":
             pass
       elif choice.lower() == "q":

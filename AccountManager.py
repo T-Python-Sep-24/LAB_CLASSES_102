@@ -1,26 +1,25 @@
 import os.path
 import pickle
-from BankAccount import *
+from BankAccount import BankAccount
 
 class AccountManager():
 
-    bankAccounts = []
-
-    # def __init__(self, bankAccount: BankAccount, fileName='bank_accounts.pkl'):
-    #     self.bankAccount = bankAccount
-    #     self.fileName = fileName
+    fileName = 'bank_accounts.pkl'
+    def __init__(self):
+        self.accounts = []
 
     def add_account(self, bankAccount: BankAccount):
-        acc = {
-            "acc_holder": bankAccount.get_account_holder(),
-            "acc_balance": bankAccount.get_balance(),
-            "acc_number": bankAccount.get_account_number()
-        }
-        self.bankAccounts.append(acc)
+
+        self.accounts.append(bankAccount)
+        print(f"Account {bankAccount.get_account_number()} added successfully, For Customer: {bankAccount.get_account_holder()} with balancce {bankAccount.get_account_holder()}")
         self.save_to_file(self.fileName)
-        print(f"Account {self.bankAccount.get_account_number()} added successfully, For Customer: {self.bankAccount.get_account_holder()} with balancce {self.bankAccount.get_account_holder()}")
+
     def display_accounts(self):
-        print(self.load_from_file(self.fileName))
+
+        self.load_from_file(self.fileName)
+        for i in self.accounts:
+            print(i.get_account_holder())
+
     def search_accounts(self, account_number):
         pass
     def delete_account(self, account_number):
@@ -29,15 +28,15 @@ class AccountManager():
 
     def save_to_file(self, fileName):
         with open(fileName, 'wb') as f:  # open a text file
-            pickle.dump(self.bankAccounts, f) # serialize the list
+            pickle.dump(self.accounts, f) # serialize the list
 
 
     def load_from_file(self, fileName):
-        with open(fileName, 'wb', encoding="utf-8") as f:  # open a text file
-            if os.path.getsize(fileName) > 0:
-
-                x = pickle.load(f)  # serialize the list
-                print(x)
-            else:
-                print("no account Yet")
-
+        
+        try:
+            with open(fileName, 'rb') as file:
+                self.accounts = pickle.load(file)
+                print(f"Accounts loaded from {fileName}.")
+                return self.accounts
+        except Exception as e:
+            print(f"Error loading from file: {e}")

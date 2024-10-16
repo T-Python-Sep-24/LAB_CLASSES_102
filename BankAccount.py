@@ -5,38 +5,50 @@ import random
 
 class BankAccount():
 
-
+    used_acc_nums = []
     def __init__(self, account_holder:str, initial_balance:int = 0):
 
         self.__account_holder = account_holder
-        self.__initial_balance = initial_balance  # 0 is the default balance
-        self.__account_number = self.get_account_number()
+        self.__balance = initial_balance  # 0 is the default balance
+        self.__account_number = self.generate_account_number()
 
     def deposit(self, amount: int):
-
-        balance = self.get_balance()
-        newBalance = balance + amount
-        self.set_Balance(newBalance)
-        return f"Balance is : {self.get_balance()}, Updated {datetime.datetime.now()}"
+        if amount > 0:
+            self.__balance += amount
+        else:
+            raise "You Cannot deposit less than 0"
+        return self.__balance
 
     def withdraw(self, amount: int):
-        if self.__initial_balance >= amount:
-            self.__initial_balance -= amount
+        if self.__balance >= amount > 0:
+            self.__balance -= amount
         else:
             raise "You have No Sufficient Funds"
-        return f" Withdrawing... Balance is : {self.__initial_balance}, Updated {datetime.datetime.now()}"
+        return self.__balance
 
     def get_balance(self):
-        return self.__initial_balance
-
-    def set_Balance(self, newBalance):
-        self.__initial_balance = newBalance
+        return self.__balance
 
     def get_account_holder(self):
         return self.__account_holder
+
     def get_account_number(self):
+        return self.__account_number
 
-        acc_num = random.randint(0000000000, 9999999999)  # unique 10 numbers
+    def generate_account_number(self):
+        while True:
+            acc_num = random.randint(0000000000, 9999999999)  # unique 10 numbers
 
-        return acc_num
+            if acc_num not in BankAccount.used_acc_nums:
+                BankAccount.used_acc_nums.append(acc_num)
+                return acc_num
 
+
+# account = BankAccount("John Doe", 1000)
+# print(f"Account Number: {account.get_account_number()}")
+# print(f"Account Holder: {account.get_account_holder()}")
+# print(f"Initial Balance: {account.get_balance()}")
+# account.deposit(500)
+# print(f"Balance after deposit: {account.get_balance()}")
+# account.withdraw(300)
+# print(f"Balance after withdrawal: {account.get_balance()}")
