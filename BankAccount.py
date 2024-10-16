@@ -1,18 +1,26 @@
 import datetime
 import random
 
-# import pickle
-
 class BankAccount():
 
-    used_acc_nums = []
-    def __init__(self, account_holder:str, initial_balance:int = 0):
+    used_account_numbers = []  # A temporary list to maintain the account numbers that already been assigned to an account
 
+    def __init__(self, account_holder:str, initial_balance:int = 0):
+        """
+        This is the constructor/initializer function for the bank account class
+        :param account_holder:
+        :param initial_balance:
+        """
         self.__account_holder = account_holder
         self.__balance = initial_balance  # 0 is the default balance
         self.__account_number = self.generate_account_number()
 
     def deposit(self, amount: int):
+        """
+        This function is to deposit amount of money to the account
+        :param amount:
+        :return: balance
+        """
         if amount > 0:
             self.__balance += amount
         else:
@@ -20,6 +28,11 @@ class BankAccount():
         return self.__balance
 
     def withdraw(self, amount: int):
+        """
+        This function is to withdraw amount of money from the account
+        :param amount:
+        :return: balance
+        """
         if self.__balance >= amount > 0:
             self.__balance -= amount
         else:
@@ -27,21 +40,37 @@ class BankAccount():
         return self.__balance
 
     def get_balance(self):
+        """
+        This function is to return the current balance of the account
+        :return: balance
+        """
         return self.__balance
 
     def get_account_holder(self):
+        """
+        This function is to return the account holder's name of the account
+        :return: account_holder
+        """
         return self.__account_holder
 
     def get_account_number(self):
+        """
+        This function is to return the account number of the account
+        :return: account_number
+        """
         return self.__account_number
 
     def generate_account_number(self):
+        """
+        This function is to generate 10 digits unique account number
+        :return: account_number
+        """
         while True:
-            acc_num = random.randint(0000000000, 9999999999)  # unique 10 numbers
+            account_number = random.randint(0000000000, 9999999999)  # unique 10 numbers
 
-            if acc_num not in BankAccount.used_acc_nums:
-                BankAccount.used_acc_nums.append(acc_num)
-                return acc_num
+            if account_number not in BankAccount.used_account_numbers:
+                BankAccount.used_account_numbers.append(account_number)
+                return account_number
 
 
 # account = BankAccount("John Doe", 1000)
