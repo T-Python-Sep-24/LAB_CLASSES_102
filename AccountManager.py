@@ -30,14 +30,22 @@ class AccountManager():
         """
         try:
             self.__load_from_file(self.fileName)
-            print(" --------- Accounts ---------")
-            for i, account in enumerate(self.accounts, start=1):
-                print(f"{i}. Account {account.get_account_number()}, "
-                      f"For Customer: {account.get_account_holder()} "
-                      f"With balancce {account.get_account_holder()}")
-            print(" --------- -------- ---------")
+            print()
+
+            if not self.accounts:
+                print("No Accounts Available")
+            else:
+                print(" --------- Accounts ---------")
+                for i, account in enumerate(self.accounts, start=1):
+                    print(f"{i}. Account {account.get_account_number()}, "
+                          f"For Customer: {account.get_account_holder()} "
+                          f"With balancce {account.get_account_holder()}")
+                print(" --------- -------- ---------")
+
         except Exception as e:
             print(e)
+
+
     def search_accounts(self, account_number):
         """
         This method search for a particular account using its number
@@ -47,16 +55,16 @@ class AccountManager():
 
         try:
             accounts = self.__load_from_file(self.fileName)
-
-            print(" --------- Accounts Founded ---------")
-            for i, account in enumerate(accounts, start=1):
-                if int(account.get_account_number()) == int(account_number):
-                    print(f"{i}. Account number: {account.get_account_number()} "
-                          f"for Customer {account.get_account_holder()} "
-                          f"Have the balance {account.get_balance()}")
-                else:
-                    print("No match")
-            print(" --------- -------- -------- ---------")
+            if not accounts:
+                print("No Match")
+            else:
+                print(" --------- Accounts Founded ---------")
+                for i, account in enumerate(accounts, start=1):
+                    if int(account.get_account_number()) == int(account_number):
+                        print(f"{i}. Account number: {account.get_account_number()} "
+                              f"for Customer {account.get_account_holder()} "
+                              f"Have the balance {account.get_balance()}")
+                print(" --------- -------- -------- ---------")
 
         except Exception as e:
             print(e)
@@ -67,16 +75,20 @@ class AccountManager():
         :param account_number:
         :return:
         """
-
-        accounts = self.__load_from_file(self.fileName)
-        for i, account in enumerate(accounts, start=1):
-            if int(account.get_account_number()) == int(account_number):
-                self.accounts.remove(account)
-                print("Account Deleted Successfully ✅")
-                self.__save_to_file(self.fileName)
+        try:
+            accounts = self.__load_from_file(self.fileName)
+            if not accounts:
+                print("No Account Available to be deleted")
             else:
-                print("No match")
-
+                for i, account in enumerate(accounts, start=1):
+                    if int(account.get_account_number()) == int(account_number):
+                        self.accounts.remove(account)
+                        print("Account Deleted Successfully ✅")
+                        self.__save_to_file(self.fileName)
+                    else:
+                        print("No match")
+        except Exception as e:
+            print(f"Error loading from file The File might be Empty or {e} ⚠ ")
         # for i in accounts:
         #     print(i.get_account_number())
 
@@ -98,11 +110,11 @@ class AccountManager():
         :param fileName:
         :return: accounts
         """
-        
+
         try:
             with open(fileName, 'rb') as file:
                 self.accounts = pickle.load(file)
                 print(f"Loading Data ... ⏳")
                 return self.accounts
         except Exception as e:
-            print(f"Error loading from file The File is Empty: {e} ⚠ ")
+            print(f"Error loading from file The File might be Empty or {e} ⚠ ")

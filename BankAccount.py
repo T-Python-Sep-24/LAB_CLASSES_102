@@ -3,9 +3,9 @@ import random
 
 class BankAccount():
 
-    used_account_numbers = []  # A temporary list to maintain the account numbers that already been assigned to an account
+    used_account_numbers = []  # A temporary list to maintain account numbers that already been assigned to an account.
 
-    def __init__(self, account_holder:str, initial_balance:int = 0):
+    def __init__(self, account_holder: str, initial_balance: float = 0):
         """
         This is the constructor/initializer function for the bank account class
         :param account_holder:
@@ -15,7 +15,7 @@ class BankAccount():
         self.__balance = initial_balance  # 0 is the default balance
         self.__account_number = self.generate_account_number()
 
-    def deposit(self, amount: int):
+    def deposit(self, amount: float):
         """
         This function is to deposit amount of money to the account
         :param amount:
@@ -27,7 +27,7 @@ class BankAccount():
             raise "You Cannot deposit less than 0"
         return self.__balance
 
-    def withdraw(self, amount: int):
+    def withdraw(self, amount: float):
         """
         This function is to withdraw amount of money from the account
         :param amount:
@@ -73,11 +73,15 @@ class BankAccount():
                 return account_number
 
 
-# account = BankAccount("John Doe", 1000)
-# print(f"Account Number: {account.get_account_number()}")
-# print(f"Account Holder: {account.get_account_holder()}")
-# print(f"Initial Balance: {account.get_balance()}")
-# account.deposit(500)
-# print(f"Balance after deposit: {account.get_balance()}")
-# account.withdraw(300)
-# print(f"Balance after withdrawal: {account.get_balance()}")
+# Testing BankAccount Class
+# try:
+    # account = BankAccount("Hmzh", 1000)
+    # print(f"Account Number: {account.get_account_number()}")
+    # print(f"Account Holder: {account.get_account_holder()}")
+    # print(f"Initial Balance: {account.get_balance()}")
+    # account.deposit(500)
+    # print("Balance:", account.get_balance())
+    # account.withdraw(300)
+    # print("Balance:", account.get_balance())
+# except Exception as e:
+# print(e)
