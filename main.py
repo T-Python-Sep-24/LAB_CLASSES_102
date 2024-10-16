@@ -27,9 +27,12 @@ while True:
             input(">>> Press Any key to continue <<<")
       elif choice == "3":
             acc_num = input("Enter the account number to search for: ")
-      
+            manager.search_accounts(acc_num)
+            input(">>> Press Any key to continue <<<")
       elif choice == "4":
-            pass
+            acc_num = input("Enter the account number to delete: ")
+            manager.delete_account(acc_num)
+            input(">>> Press Any key to continue <<<")
       elif choice.lower() == "q":
             print("Good Bay")
             break
