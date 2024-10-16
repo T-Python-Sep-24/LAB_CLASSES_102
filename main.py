@@ -2,7 +2,7 @@ from classes1 import BankAccount
 
 
 
-account = BankAccount("John Doe", 0)
+account = BankAccount("Eyad", 0)
 
 print(f"Account Holder: {account.get_account_holder()}")
 print(f"Account Number: {account.get_account_number()}")
