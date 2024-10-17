@@ -37,20 +37,20 @@ class BankAccount:
 
     def deposit(self, amount: float):
         self.set_balance(amount + self.get_balance())
-        return self.get_balance()
 
     def withdraw(self, amount: float):
         if amount <= self.get_balance():
             self.set_balance(self.get_balance() - amount)
+            return True
         else:
             print(f'Sorry {self.get_account_holder()}! The amount {amount} to withdraw exceeds the account balance {self.get_balance()}')
-        return self.get_balance()
+            return False
 
 class AccountManager:
     def __init__(self):
         self.accounts = self.load_from_file('accounts.pkl')
 
-    def add_account(self, bank_account: BankAccount):
+    def Add_Update_account(self, bank_account: BankAccount):
         self.accounts[bank_account.get_account_number()] = {
             'account_holder': bank_account.get_account_holder(),
             'balance': bank_account.get_balance(),

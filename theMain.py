@@ -27,7 +27,7 @@ while True:
         else:
             balance = 0
         newAccount = BankAccount(name, balance)
-        manager.add_account(newAccount)
+        manager.Add_Update_account(newAccount)
 
     elif choose == 2:
         try:
@@ -50,7 +50,7 @@ while True:
             account = manager.accounts[account_deposit]
             update_balanceD = BankAccount(account['account_holder'], account['balance'])
             update_balanceD.deposit(amount)
-            manager.save_to_file('accounts.pkl', manager.accounts)
+            manager.Add_Update_account(update_balanceD)
             print('Your balance now:', update_balanceD.get_balance())
 
     elif choose == 6:
@@ -60,7 +60,7 @@ while True:
             account = manager.accounts[account_withdraw]
             update_balanceW = BankAccount(account['account_holder'], account['balance'])
             if update_balanceW.withdraw(amount):
-                manager.save_to_file('accounts.pkl', manager.accounts)
+                manager.Add_Update_account(update_balanceW)
                 print('Your balance now:', update_balanceW.get_balance())
 
     elif choose == 7:
