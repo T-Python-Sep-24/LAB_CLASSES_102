@@ -22,7 +22,7 @@ class AccountManager:
 
 
 #Search Account
-def search_accounts(self, account_number):
+    def search_accounts(self, account_number):
         for account in self.user_accounts:
             if account.account_number == account_number:
                 print(account)
@@ -34,7 +34,7 @@ def search_accounts(self, account_number):
         
 
 #Delete Account
-def delete_account(self, account_number):
+    def delete_account(self, account_number):
         account = self.search_accounts(account_number)
         if account:
             self.user_accounts.remove(account)
@@ -45,26 +45,26 @@ def delete_account(self, account_number):
 
 
 #Save Account with pickle
-def save_account(self, filename:str):
-    try:
-        with open(filename, 'wb') as file:
-            pickle.dump(self.user_accounts, file)
-            print("Accounts Saved")
-    
-    except Exception as e:
-        print(f"Error Saving File: {e}")
+    def save_account(self, filename:str):
+        try:
+            with open(filename, 'wb') as file:
+                pickle.dump(self.user_accounts, file)
+                print("Accounts Saved")
+        
+        except Exception as e:
+            print(f"Error Saving File: {e}")
 
 
 #Load Account with pickle
-def load_account(self, filename: str):
-    try:
-        with open(filename, 'rb') as file:
-            self.user_accounts = pickle.load(file)
-            print("Accounts Loaded")
+    def load_account(self, filename: str):
+        try:
+            with open(filename, 'rb') as file:
+                self.user_accounts = pickle.load(file)
+                print("Accounts Loaded")
+                
+        except FileNotFoundError:
+            print("File Not Found")
             
-    except FileNotFoundError:
-        print("File Not Found")
-        
-    except Exception as e:
-        print(f"Error Loading File: {e}")        
+        except Exception as e:
+            print(f"Error Loading File: {e}")        
 
