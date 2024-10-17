@@ -58,7 +58,7 @@ class AccountManager:
         self.save_to_file('accounts.pkl', self.accounts)
 
     def display_accounts(self):
-        i = 0
+        i = 1
         for number, account in self.accounts.items():
             print(f'{i}. Account Number: {number}, Account Holder Name: {account["account_holder"]}, Account Balance: {account["balance"]}')
             i += 1

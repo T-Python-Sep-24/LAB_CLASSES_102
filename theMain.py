@@ -10,7 +10,8 @@ menu = '''
 7. exit.
 '''
 
-print('Account Manager System: \n')
+print()
+print('Account Manager System')
 
 manager = AccountManager()
 
@@ -35,32 +36,32 @@ while True:
             print(e.__class__)
 
     elif choose == 3:
-        account_to_search = input('Enter the account number you want to SEARCH: ')
+        account_to_search = int(input('Enter the account number you want to SEARCH: '))
         manager.search_accounts(account_to_search)
 
     elif choose == 4:
-        account_to_delete = input('Enter the account number you want to DELETE: ')
+        account_to_delete = int(input('Enter the account number you want to DELETE: '))
         manager.delete_account(account_to_delete)
 
     elif choose == 5:
-        account_deposit = input('Enter the account number you want to Deposit into: ')
+        account_deposit = int(input('Enter the account number you want to Deposit into: '))
         if manager.search_accounts(account_deposit):
             amount = float(input('How much do you want to deposit?: '))
             account = manager.accounts[account_deposit]
-            account_instance = BankAccount(account['account_holder'], account['balance'])
-            account_instance.deposit(amount)
+            update_balanceD = BankAccount(account['account_holder'], account['balance'])
+            update_balanceD.deposit(amount)
             manager.save_to_file('accounts.pkl', manager.accounts)
-            print('Your balance now:', account_instance.get_balance())
+            print('Your balance now:', update_balanceD.get_balance())
 
     elif choose == 6:
-        account_withdraw = input('Enter the account number you want to Withdraw from: ')
+        account_withdraw = int(input('Enter the account number you want to Withdraw from: '))
         if manager.search_accounts(account_withdraw):
             amount = float(input('How much do you want to Withdraw?: '))
             account = manager.accounts[account_withdraw]
-            account_instance = BankAccount(account['account_holder'], account['balance'])
-            if account_instance.withdraw(amount):
+            update_balanceW = BankAccount(account['account_holder'], account['balance'])
+            if update_balanceW.withdraw(amount):
                 manager.save_to_file('accounts.pkl', manager.accounts)
-                print('Your balance now:', account_instance.get_balance())
+                print('Your balance now:', update_balanceW.get_balance())
 
     elif choose == 7:
         print("Exiting Account Manager System. Thank you!")
